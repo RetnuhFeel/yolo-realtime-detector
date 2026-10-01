@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+venv/
+.venv/
+env/
+
+# Model weights and outputs (downloaded / generated at runtime)
+*.pt
+*.onnx
+runs/
+outputs/
+
+# Archives and OS files
+*.zip
+.DS_Store
+.idea/
+.vscode/

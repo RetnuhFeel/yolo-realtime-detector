@@ -4,10 +4,6 @@ A clean, modern computer vision portfolio project that demonstrates real-time (a
 
 This project is designed as a strong GitHub showcase for Machine Learning / Computer Vision Engineer roles.
 
-![Demo Placeholder](assets/demo.gif)
-
-> **Note**: Replace the placeholder above with a real GIF or screenshot once you have a working demo.
-
 ---
 
 ## Features
@@ -19,6 +15,7 @@ This project is designed as a strong GitHub showcase for Machine Learning / Comp
 - **Webcam snapshot** support
 - Clean, professional UI
 - Modular code structure (`src/detector.py` for easy extension)
+- Per-session temp directories that are cleaned up after video processing
 
 ---
 
@@ -27,14 +24,15 @@ This project is designed as a strong GitHub showcase for Machine Learning / Comp
 ```
 yolo-realtime-detector/
 ├── app.py                  # Main Streamlit application
-├── requirements.txt
+├── run_cli.py              # Command-line detector for images / videos
+├── requirements.txt        # Runtime dependencies
+├── requirements-dev.txt    # + pytest for the test suite
 ├── .gitignore
 ├── README.md
 ├── src/
-│   └── detector.py         # Reusable YOLO detector class
-├── models/                 # Place custom fine-tuned .pt models here
-├── assets/                 # Screenshots, GIFs, example images
-└── notebooks/              # Optional experimentation notebooks
+│   └── detector.py         # Reusable YOLO detector class + video helpers
+└── tests/
+    └── test_detector.py    # Unit tests (no model weights required)
 ```
 
 ---
@@ -44,7 +42,7 @@ yolo-realtime-detector/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/yolo-realtime-detector.git
+git clone https://github.com/RetnuhFeel/yolo-realtime-detector.git
 cd yolo-realtime-detector
 ```
 
@@ -73,6 +71,24 @@ streamlit run app.py
 
 The app will open in your browser at `http://localhost:8501`.
 
+### Optional: ffmpeg
+
+Ultralytics typically writes processed videos as `.avi`, which most browsers can't play inline. If `ffmpeg` is on your `PATH`, the app converts the result to H.264 `.mp4` automatically; otherwise it offers the file as a download.
+
+### Run the tests
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+### CLI
+
+```bash
+python run_cli.py --source path/to/image.jpg --save
+python run_cli.py --source path/to/video.mp4 --conf 0.4
+```
+
 ---
 
 ## How to Use
@@ -97,7 +113,7 @@ These are excellent ways to make the project even stronger for your resume:
 - [ ] Add object tracking (ByteTrack or BoT-SORT)
 - [ ] Deploy the app publicly (Streamlit Community Cloud or Hugging Face Spaces)
 - [ ] Add a simple performance comparison (FPS, mAP notes)
-- [ ] Create a CLI version for batch processing of folders of images
+- [ ] Extend the CLI (`run_cli.py`) for batch processing of folders of images
 
 ---
 

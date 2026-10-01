@@ -30,7 +30,8 @@ def main():
     print(f"\nProcessed: {args.source}")
     print(f"Model: {args.model} | Confidence: {args.conf}")
     if args.save:
-        print("Results saved to the 'runs/detect' folder.")
+        save_dir = getattr(results[0], "save_dir", None) if results else None
+        print(f"Results saved to: {save_dir or 'the Ultralytics runs/detect folder'}")
 
 
 if __name__ == "__main__":
